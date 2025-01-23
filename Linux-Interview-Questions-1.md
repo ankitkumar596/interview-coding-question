@@ -214,4 +214,282 @@ Use tools like:
 
 ---
 
-Let me know if you want me to elaborate on any specific topic or further tailor the responses.
+### **15. What is a mount in Linux, and how do you create one?**
+- **Mounting**: The process of attaching a filesystem to a directory so it becomes accessible.
+  
+**Command to Mount:**
+```bash
+mount /dev/sdX /mnt
+```
+Here:
+- `/dev/sdX` is the block device (e.g., a disk or partition).
+- `/mnt` is the directory where the filesystem will be mounted.
+
+**Example for Interview:**  
+"I mount filesystems to make them accessible. For example, to mount a USB drive at `/mnt/usb`, I use `mount /dev/sdb1 /mnt/usb`. To persist the mount across reboots, I would add an entry in `/etc/fstab`."
+
+---
+
+### **16. How do you troubleshoot live logs in Linux?**
+You can use `tail` or `less` to view logs in real-time.
+
+**Commands:**
+- View the last lines and keep updating:
+  ```bash
+  tail -f /var/log/syslog
+  ```
+- Filter logs with `grep`:
+  ```bash
+  tail -f /var/log/syslog | grep error
+  ```
+
+**Example for Interview:**  
+"I monitor live logs using `tail -f`. For instance, to troubleshoot web server issues, I might use `tail -f /var/log/nginx/error.log`."
+
+---
+
+### **17. What is the `sed` command in Linux?**
+`sed` (Stream Editor) is used for text processing and manipulation.
+
+**Examples:**
+- Replace all occurrences of "foo" with "bar":
+  ```bash
+  sed 's/foo/bar/g' file.txt
+  ```
+- Delete lines containing "error":
+  ```bash
+  sed '/error/d' file.txt
+  ```
+
+**Example for Interview:**  
+"I use `sed` for quick text processing. For example, `sed 's/old/new/g' file.txt` replaces all occurrences of 'old' with 'new' in `file.txt`."
+
+---
+
+### **18. What is the `awk` command in Linux?**
+`awk` is a text processing tool used for pattern scanning and data extraction.
+
+**Examples:**
+- Print the second column of a file:
+  ```bash
+  awk '{print $2}' file.txt
+  ```
+- Sum values in the second column:
+  ```bash
+  awk '{sum += $2} END {print sum}' file.txt
+  ```
+
+**Example for Interview:**  
+"I use `awk` for processing structured data like logs. For instance, `awk '{print $1, $3}' /var/log/syslog` extracts the first and third fields of each line."
+
+---
+
+### **19. What are the `grep` and `egrep` commands in Linux?**
+- **grep**: Searches for patterns in files.
+  ```bash
+  grep "pattern" file.txt
+  ```
+- **egrep**: An extended version of `grep` supporting advanced regex.
+  ```bash
+  egrep "pattern1|pattern2" file.txt
+  ```
+
+**Example for Interview:**  
+"I use `grep` to search logs for specific errors, e.g., `grep 'error' /var/log/syslog`. For complex patterns, I use `egrep`."
+
+---
+
+### **20. How can you list only directories in a Linux environment?**
+Use the `ls` and `find` commands:
+- **ls** with `-d` and `*/`:
+  ```bash
+  ls -d */
+  ```
+- **find** to filter directories:
+  ```bash
+  find . -type d
+  ```
+
+**Example for Interview:**  
+"To list directories, I’d use `find . -type d` for recursive searches or `ls -d */` for the current level."
+
+---
+
+### **21. How do you check the processes running in Linux?**
+Use `ps`, `top`, or `htop`:
+- **ps**:
+  ```bash
+  ps aux
+  ```
+- **top**: Displays real-time resource usage.
+- **htop**: An interactive version of `top`.
+
+**Example for Interview:**  
+"I monitor processes with `ps aux`. If I need real-time updates, I use `top` or `htop`."
+
+---
+
+### **22. How do you get a Java thread dump in Linux?**
+Use the `jstack` utility:
+```bash
+jstack <PID>
+```
+1. Find the Java process ID:
+   ```bash
+   ps aux | grep java
+   ```
+2. Generate the thread dump:
+   ```bash
+   jstack 1234 > thread_dump.txt
+   ```
+
+**Example for Interview:**  
+"I use `jstack` to diagnose Java application issues. For example, `jstack 1234 > dump.txt` collects a thread dump for analysis."
+
+---
+
+### **23. How can you check the running ports on a Linux machine?**
+Use `netstat` or `ss`:
+- **netstat**:
+  ```bash
+  netstat -tuln
+  ```
+- **ss**:
+  ```bash
+  ss -tuln
+  ```
+
+**Example for Interview:**  
+"To troubleshoot connectivity, I check open ports with `ss -tuln`. It lists all listening ports and their protocols."
+
+---
+
+### **24. How do you declare a variable in a shell script?**
+```bash
+VAR_NAME="value"
+```
+Access it using `$`:
+```bash
+echo $VAR_NAME
+```
+
+**Example for Interview:**  
+"I use `VAR_NAME=value` to define variables and `$VAR_NAME` to reference them. For instance, `NAME=Ankit` followed by `echo $NAME` prints 'Ankit'."
+
+---
+
+### **25. What do `$?`, `$$`, and `$*` represent in shell scripting?**
+- **`$?`**: Exit status of the last command.
+- **`$$`**: Process ID of the current shell.
+- **`$*`**: All command-line arguments as a single string.
+
+**Example for Interview:**  
+"`$?` helps me check if a command succeeded, `$*` is useful for processing all script arguments, and `$$` identifies the script's PID for debugging."
+
+---
+
+### **26. How do you read command-line input in a shell script?**
+Use `read`:
+```bash
+echo "Enter your name:"
+read NAME
+echo "Hello, $NAME"
+```
+
+**Example for Interview:**  
+"I use `read` for interactive scripts. For example, prompting the user to input a filename."
+
+---
+
+### **27. What is `umask` in Linux?**
+`umask` defines default file permissions.
+
+**Example:**
+```bash
+umask 022
+```
+Here, newly created files get permissions `644` (666 - 022).
+
+**Example for Interview:**  
+"I set `umask` to define secure defaults. For instance, `umask 027` restricts group and others' access."
+
+---
+
+### **28. How do you change file permissions in Linux?**
+Use `chmod`:
+```bash
+chmod 644 file.txt
+```
+- `6`: Read + Write
+- `4`: Read
+- `1`: Execute
+
+**Example for Interview:**  
+"I use `chmod` to manage permissions. For instance, `chmod 755 script.sh` makes it executable."
+
+---
+
+### **29. How can you connect to remote servers without a password?**
+Use SSH key authentication:
+1. Generate a key:
+   ```bash
+   ssh-keygen
+   ```
+2. Copy the key to the server:
+   ```bash
+   ssh-copy-id user@server
+   ```
+
+**Example for Interview:**  
+"SSH keys enable secure passwordless login. For instance, `ssh-copy-id` installs the public key on the remote server."
+
+---
+
+### **30. How do you open a file in read-only mode in `vi` editor?**
+Use the `-R` flag:
+```bash
+vi -R file.txt
+```
+
+**Example for Interview:**  
+"I use `vi -R` to ensure files aren't accidentally modified during inspection."
+
+---
+
+### **31. What is the purpose of the `export` command in Linux?**
+`export` makes a variable available to child processes.
+
+**Example:**
+```bash
+export VAR_NAME=value
+```
+
+**Example for Interview:**  
+"I use `export` to pass variables to subshells. For example, `export PATH=/new/path:$PATH` updates the environment for child processes."
+
+---
+
+### **32. How do you send error logs and stdout logs to different files?**
+Use redirection:
+```bash
+command > stdout.log 2> stderr.log
+```
+
+**Example for Interview:**  
+"I use redirection to separate logs. For instance, `ls > out.log 2> error.log` captures standard output and errors separately."
+
+---
+
+### **33. What is the `nohup` command in Linux?**
+`nohup` runs commands immune to hangups.
+
+**Example:**
+```bash
+nohup ./script.sh &
+```
+
+**Example for Interview:**  
+"I use `nohup` to run long-running processes. For instance, `nohup backup.sh &` ensures the script runs even if the session is closed."
+
+---
+
